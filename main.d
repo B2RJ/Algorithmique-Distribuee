@@ -39,7 +39,6 @@ void spawnedFunc(int myId, int n)
         }
     );
     
-    // Question 2
     writeln("Je suis le processus ", myId, " et j'ai pour voisin du haut ", upNeighbor.lid, ", pour voisin du bas ", downNeighbor.lid, " pour voisin de gauche ", leftNeighbor.lid, " et pour voisin de droite ", rightNeighbor.lid);
 
     // end of your code
@@ -52,9 +51,9 @@ void spawnedFunc(int myId, int n)
 void main()
 {
     // number of child processes (must be a number that can be sqrt)
-    int n = 25;
-    int row = 5;
-    int col = 5;
+    int row = 4;
+    int col = 4;
+    int n = row * col;
 
     // spawn threads (child processes)
     Noeud [][] childTid = new Noeud[][](row, col);
