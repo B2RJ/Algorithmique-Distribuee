@@ -5,6 +5,10 @@ import core.time;
 import std.algorithm;
 import std.math;
 
+import std.container : DList;
+import std.range : popFrontN, popBackN, walkLength;
+
+
 struct CancelMessage{}
 
 struct Noeud
@@ -39,7 +43,47 @@ void spawnedFunc(int myId, int n)
         }
     );
     
-    writeln("Je suis le processus ", myId, " et j'ai pour voisin du haut ", upNeighbor.lid, ", pour voisin du bas ", downNeighbor.lid, " pour voisin de gauche ", leftNeighbor.lid, " et pour voisin de droite ", rightNeighbor.lid);
+    //writeln("Je suis le processus ", myId, " et j'ai pour voisin du haut ", upNeighbor.lid, ", pour voisin du bas ", downNeighbor.lid, " pour voisin de gauche ", leftNeighbor.lid, " et pour voisin de droite ", rightNeighbor.lid);
+
+    // Creation des deux tableaux : Celui qui recence les noeuds et Celui qui recence leur voisin
+
+    Noeud moi;
+    moi.lid = myId;
+
+    int[] nodes = [myId, upNeighbor.lid, downNeighbor.lid, leftNeighbor.lid, rightNeighbor.lid];
+
+     if (myId == 9) {
+        writeln(nodes); 
+    }
+
+    //On peut pas creer un tableau avec des variables 
+    //On peut pas donner une valeur dans une case précise à un tableau dynamique
+    //Du coup, je dois définir moi même le tableau
+    int[4][16] nodesNeighborhood = -2;
+    for(int i = 0; i<4 ; i++)
+    {
+        nodesNeighborhood[myId][i] = nodes[i+1]; 
+    }
+
+    if (myId == 9) {
+        writeln(nodesNeighborhood); 
+    }
+
+    // Envoie de mes voisins à mes voisins
+    for(int i = 0; i<4 ; i++)
+    {
+        //send(nodes[i+1], cast(immutable)upNeighbor, cast(immutable)downNeighbor, cast(immutable)leftNeighbor, cast(immutable)rightNeighbor); 
+    }
+
+    // while mon tablea 1 plus longue que mon nombre de ligne à -2
+    // while(nodes.length < 16)
+    // {
+    //     // Noeud[] bip = myId;
+    //     // nodes = nodes + bip;
+    // }
+
+    // je reçoit les listes de mes potes
+
 
     // end of your code
 
