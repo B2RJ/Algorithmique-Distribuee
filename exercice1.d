@@ -50,11 +50,18 @@ void spawnedFunc(int myId, int n)
     Noeud moi;
     moi.lid = myId;
 
+
     int[] nodes = [myId, upNeighbor.lid, downNeighbor.lid, leftNeighbor.lid, rightNeighbor.lid];
 
-     if (myId == 9) {
-        writeln(nodes); 
-    }
+    // Tableau de destinataire
+    Tid[4] neighbourRecipient = [upNeighbor.tid, downNeighbor.tid, leftNeighbor.tid, rightNeighbor.tid];
+
+    //All is right, tout le monde écrit son tableau même 0
+    //writeln(nodes);
+
+    // if (myId == 9) {
+    //     writeln(nodes); 
+    // }
 
     //On peut pas creer un tableau avec des variables 
     //On peut pas donner une valeur dans une case précise à un tableau dynamique
@@ -65,23 +72,37 @@ void spawnedFunc(int myId, int n)
         nodesNeighborhood[myId][i] = nodes[i+1]; 
     }
 
-    if (myId == 9) {
-        writeln(nodesNeighborhood); 
-    }
+    //Ok, tout le monde le fait même 0
+    //writeln("Je suis ", myId, " et voilà mon tableau: " ,  "\x0a", nodesNeighborhood);
+    // if (myId == 9) {
+    //     writeln(nodesNeighborhood); 
+    // }
 
     // Envoie de mes voisins à mes voisins
     for(int i = 0; i<4 ; i++)
+    {   
+        //writeln(myId);
+        if(nodes[i+1] != -1)
+        {
+            send(neighbourRecipient[i], myId, cast(immutable)upNeighbor, cast(immutable)downNeighbor, cast(immutable)leftNeighbor, cast(immutable)rightNeighbor);
+            //writeln("Je suis ", myId, " et j'ai envoyé à ", neighbourRecipient[i]);
+        }
+    }
+    //writeln("Je suis ", myId, " et j'ai envoyé à mes voisin");
+
+    while(nodes.length < 4)
     {
-        //send(nodes[i+1], cast(immutable)upNeighbor, cast(immutable)downNeighbor, cast(immutable)leftNeighbor, cast(immutable)rightNeighbor); 
+        receive
+        (
+            (int hisId, immutable(Noeud) uneighbor, immutable(Noeud) dneighbor, immutable(Noeud) lneighbor, immutable(Noeud) rneighbor)
+            {
+                //writeln("Je suis ", myId, " et j'ai bien reçu");
+            }
+
+        );
     }
 
     // while mon tablea 1 plus longue que mon nombre de ligne à -2
-    // while(nodes.length < 16)
-    // {
-    //     // Noeud[] bip = myId;
-    //     // nodes = nodes + bip;
-    // }
-
     // je reçoit les listes de mes potes
 
 
