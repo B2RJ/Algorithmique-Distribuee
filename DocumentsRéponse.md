@@ -59,11 +59,13 @@ Nous pouvons tracer le même genre d'arbre pour chacun des noeuds du graphe.
 
 Question 2: 
 
-Un noeud sait qu'il a terminé quand la taille de sa liste de noeud est égale au nombre de liste qu'il a pas noeud. 
+Un noeud sait qu'il a terminé quand la taille de sa liste de noeud est égale au nombre de listes dans sans liste qui recence les paires "ID(k), ID-voisins(k)". 
 
 Question 3: 
 
-Je vais utiliser une liste pour le nombre de noeud et une une liste de listes pour accéder aux listes de voisins. 
+Si nous avions utilisé un langage avec des structures de données complètes, c'est à dire des listes qui donne la taille de la liste quand on le demande, j'aurais utilisé des listes. Or, ici, que ce soit les DList ou les SList. , ce n'est pas le cas. 
+
+J'ai donc utilisé un tableau pour stocker tout les noeuds découvert par le noeud qui remplit le tableau et un autre tableau 2D celui-ci pour connaitre les voisins de chaque noeud. 
 
 Question 4 : 
 
