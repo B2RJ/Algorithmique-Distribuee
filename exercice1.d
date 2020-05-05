@@ -26,6 +26,19 @@ void receiveAllFinalization(Noeud [][] childTid, int row, int col)
     }
 }
 
+
+bool nodesNeighborhoodComplete(int* nodesNeighborhood){
+    for (int i = 0 ; i<4 ; i++){
+        for (int j = 0 ; j <16 ; j++) {
+            if(nodesNeighborhood[i][j] == -2){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+
 void spawnedFunc(int myId, int n)
 {
   
@@ -85,7 +98,12 @@ void spawnedFunc(int myId, int n)
         }
     }
 
-    while(nodes.length <16)
+    //Il n'y a pas contains() ou canFind() sur un tableau 2D, 
+    //on va donc rendre le code encore moins lisible
+    int * p;
+    p = nodesNeighborhoodComplete;
+    //bool a = nodesNeighborhoodComplete(p);
+    while(true)
     {
         receive
         (
@@ -95,31 +113,42 @@ void spawnedFunc(int myId, int n)
                     //On ne fait rien, mais "!" c'est pas not dans ce langage
                 } else {
                     nodes = nodes ~ [hisId];
+                    
                 }
                 if(nodes.canFind(uneighbor.lid) || uneighbor.lid == -1 ) {
                     //Même chose. L'impression de coder comme en L1
                 }
                 else {
                     nodes = nodes ~ [uneighbor.lid];
+                    
                 }
                 if(nodes.canFind(dneighbor.lid) || dneighbor.lid == -1 ) {
                     //Toujours pareil, pas de length ou de size sur les listes, je trouve pas le not
                 }
                 else {
                     nodes = nodes ~ [dneighbor.lid];
+                    
                 }
                 if(nodes.canFind(lneighbor.lid) ||lneighbor.lid == -1 ) {
                     //Toujours pareil
                 }
                 else {
                     nodes = nodes ~ [lneighbor.lid];
+                    
                 }
                 if(nodes.canFind(rneighbor.lid) ||rneighbor.lid == -1 ) {
                     //Désolé pour la longueur du code
                 }
                 else {
                     nodes = nodes ~ [rneighbor.lid];
+                    
                 }
+
+                writeln(hisId);
+                nodesNeighborhood[hisId][0] = uneighbor.lid;
+                nodesNeighborhood[hisId][1] = dneighbor.lid;
+                nodesNeighborhood[hisId][2] = lneighbor.lid;
+                nodesNeighborhood[hisId][3] = rneighbor.lid;
                 
                 // Envoie de ceci à mes voisins, sauf celui qui me l'a envoyé
                 for(int i = 0; i<4 ; i++)
@@ -133,8 +162,13 @@ void spawnedFunc(int myId, int n)
 
         );
     }
+    //writeln("Je suis: ", myId, " et voici mon tableau: ", nodes);
+    if(myId==0) {
+        writeln("Je suis: ", myId, " et voici mon tableau: ", nodes);
+        writeln("Je suis: ", myId, " et voici mon tableau: ", nodesNeighborhood);
+        }
+    
 
-    writeln("Je suis: ", myId, " et voici mon tableau: ", nodes);
     // end of your code
 
     send(ownerTid, CancelMessage());
