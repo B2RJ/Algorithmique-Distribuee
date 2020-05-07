@@ -61,6 +61,10 @@ void spawnedFunc(int myId, int n)
             rightNeighbor = cast(Noeud)rneighbor;
         }
     );
+
+    // Création du compteur de message
+    // Il est à 1 car il y a le message du père
+    int monCptMessage = 1;
     
     // Creation des deux tableaux : Celui qui recence les noeuds et Celui qui recence leur voisin
     Noeud moi;
@@ -74,7 +78,7 @@ void spawnedFunc(int myId, int n)
     //On peut pas creer un tableau avec des variables 
     //On peut pas donner une valeur dans une case précise à un tableau dynamique
     //Du coup, je dois définir moi même le tableau. 
-    // Avec un langage différent, j'aurais utilisé une variable au lieu du "16", 
+    // Avec un langage différent, j'aurais utilisé une variable au lieu du du nombre de noeud, 
     //ça m'aurait eviter de devoir le changer à chaque changement de taille
     int[4][16] nodesNeighborhood = -2;
     for(int i = 0; i<4 ; i++)
@@ -88,7 +92,8 @@ void spawnedFunc(int myId, int n)
         //writeln(myId);
         if(nodesBasic[i+1] != -1)
         {
-            send(neighbourRecipient[i], myId, cast(immutable)upNeighbor, cast(immutable)downNeighbor, cast(immutable)leftNeighbor, cast(immutable)rightNeighbor);
+            monCptMessage = monCptMessage + 1;
+            send(neighbourRecipient[i], myId, cast(immutable)upNeighbor, cast(immutable)downNeighbor, cast(immutable)leftNeighbor, cast(immutable)rightNeighbor, myId);
         }
     }
     
@@ -104,53 +109,45 @@ void spawnedFunc(int myId, int n)
         }
     }
 
-    if(myId == 2) {
-        //writeln("Je suis: ", myId, " et le booleen est a: ", a, " voici mon tableau", nodesNeighborhood);
-    }
-    bool b = myCanFind(nodesNeighborhood);
-    //bool a = nodesNeighborhoodComplete(p);
+    // if(myId == 2) {
+    //     //writeln("Je suis: ", myId, " et le booleen est a: ", a, " voici mon tableau", nodesNeighborhood);
+    // }
     while(myCanFind(nodesNeighborhood))
     {
         receive
         (
-            (int hisId, immutable(Noeud) uneighbor, immutable(Noeud) dneighbor, immutable(Noeud) lneighbor, immutable(Noeud) rneighbor)
+            (int hisId, immutable(Noeud) uneighbor, immutable(Noeud) dneighbor, immutable(Noeud) lneighbor, immutable(Noeud) rneighbor, int IdSources)
             {
                 if(nodes.canFind(hisId) || hisId == -1 ){
                     //On ne fait rien, mais "!" c'est pas not dans ce langage
                 } else {
                     nodes = nodes ~ [hisId];
-                    
                 }
                 if(nodes.canFind(uneighbor.lid) || uneighbor.lid == -1 ) {
                     //Même chose. L'impression de coder comme en L1
                 }
                 else {
                     nodes = nodes ~ [uneighbor.lid];
-                    
                 }
                 if(nodes.canFind(dneighbor.lid) || dneighbor.lid == -1 ) {
                     //Toujours pareil, pas de length ou de size sur les listes, je trouve pas le not
                 }
                 else {
                     nodes = nodes ~ [dneighbor.lid];
-                    
                 }
                 if(nodes.canFind(lneighbor.lid) ||lneighbor.lid == -1 ) {
                     //Toujours pareil
                 }
                 else {
                     nodes = nodes ~ [lneighbor.lid];
-                    
                 }
                 if(nodes.canFind(rneighbor.lid) ||rneighbor.lid == -1 ) {
                     //Désolé pour la longueur du code
                 }
                 else {
                     nodes = nodes ~ [rneighbor.lid];
-                    
                 }
 
-                //writeln(hisId);
                 nodesNeighborhood[hisId][0] = uneighbor.lid;
                 nodesNeighborhood[hisId][1] = dneighbor.lid;
                 nodesNeighborhood[hisId][2] = lneighbor.lid;
@@ -159,19 +156,21 @@ void spawnedFunc(int myId, int n)
                 // Envoie de ceci à mes voisins, sauf celui qui me l'a envoyé
                 for(int i = 0; i<4 ; i++)
                 {   
-                    if(nodesBasic[i+1] != -1)
+                    if(nodesBasic[i+1] != -1 && IdSources != nodesBasic[i+1])
                     {
-                        send(neighbourRecipient[i], hisId, uneighbor, dneighbor, lneighbor, rneighbor);
+                        monCptMessage = monCptMessage + 1;
+                        send(neighbourRecipient[i], hisId, uneighbor, dneighbor, lneighbor, rneighbor, myId);
                     }
                 }
             }
         );
     }
-    //writeln("Je suis: ", myId, " et voici mon tableau: ", nodes);
+
     // if(myId == 2) {
-    //     writeln("Je suis: ", myId, " et voici mon tableau: ", nodes);
-    //     writeln("Je suis: ", myId, " et voici mon tableau: ", nodesNeighborhood);
+    //     writeln("Je suis: ", myId, " voici mon tableau", nodesNeighborhood);
     // }
+
+    send(ownerTid, monCptMessage);
 
     // end of your code
 
@@ -213,6 +212,19 @@ void main()
             send(childTid[i][j].tid, cast(immutable)up, cast(immutable)down, cast(immutable)left, cast(immutable)right);
         }
     }
+
+    int nbMessageTotal = 0;
+    int i = 0;
+    while (i<16) {
+        receive(
+            (int nbMessage)
+            {
+                nbMessageTotal = nbMessageTotal + nbMessage;
+                i = i + 1;
+            }
+        );    
+    }
+    writeln(nbMessageTotal);
 
     // wait for all completions
     receiveAllFinalization(childTid, row, col);
