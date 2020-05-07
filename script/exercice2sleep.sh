@@ -2,10 +2,10 @@
 let "min = 1000000"
 let "max = 0"
 let "sum = 0"
-#dmd -of=./out/exercice1  ../exercice1.d
+#dmd -of=./out/exercice2sleep  ../exercice2sleep.d
 for i in {1..1000}
 do
-    let current=$(./out/exercice1)
+    let current=$(./out/exercice2sleep)
     let "sum = sum + current"
     if [ $min -gt $current ]
     then    
