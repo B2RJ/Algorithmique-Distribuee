@@ -27,28 +27,6 @@ void receiveAllFinalization(Noeud [][] childTid, int row, int col)
 }
 
 
-bool nodesNeighborhoodComplete(int[4][16]* nodesNeighborhood, int myId){
-    if (myId == 2) {
-                 //writeln("Debut");
-    }    
-    for (int i = 1 ; i<4 ; i++){
-        for (int j = 1 ; j <16 ; j++) {
-            if (myId == 2) {
-                //writeln("==>", nodesNeighborhood[i][j]);
-            }    
-            if(nodesNeighborhood[i][j] == [-2, -2, -2, -2]){
-                if (myId == 2) {
-                 //writeln("Fin");
-                } 
-                return true;
-            }
-        }
-    }
-    if (myId == 2) {
-        //writeln("Fin");
-    } 
-    return false;
-}
 
 /*
     Bon, ce coup ci c'est la classe "Arrays" qui est pas finie. 
@@ -126,11 +104,6 @@ void spawnedFunc(int myId, int n)
         }
     }
 
-    //Il n'y a pas contains() ou canFind() sur un tableau 2D, 
-    //on va donc rendre le code encore moins lisible
-    int[4][16] * p;
-    p = &nodesNeighborhood;
-    bool a = nodesNeighborhoodComplete(p, myId);
     if(myId == 2) {
         //writeln("Je suis: ", myId, " et le booleen est a: ", a, " voici mon tableau", nodesNeighborhood);
     }
@@ -195,11 +168,10 @@ void spawnedFunc(int myId, int n)
         );
     }
     //writeln("Je suis: ", myId, " et voici mon tableau: ", nodes);
-    if(true) {
-        writeln("Je suis: ", myId, " et voici mon tableau: ", nodes);
-        writeln("Je suis: ", myId, " et voici mon tableau: ", nodesNeighborhood);
-        }
-    
+    // if(myId == 2) {
+    //     writeln("Je suis: ", myId, " et voici mon tableau: ", nodes);
+    //     writeln("Je suis: ", myId, " et voici mon tableau: ", nodesNeighborhood);
+    // }
 
     // end of your code
 
