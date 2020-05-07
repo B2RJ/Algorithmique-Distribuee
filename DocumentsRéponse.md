@@ -59,18 +59,87 @@ Nous pouvons tracer le même genre d'arbre pour chacun des noeuds du graphe.
 
 Question 2: 
 
-Un noeud sait qu'il a terminé quand la taille de sa liste de noeud est égale au nombre de listes dans sans liste qui recence les paires "ID(k), ID-voisins(k)". 
+D'après l'algorithme : Un noeud sait qu'il a terminé quand la taille de sa liste de noeud est égale au nombre de listes dans sans liste qui recence les paires "ID(k), ID-voisins(k)". 
+
+C'est également ce que j'aurais implémenté si la classe liste fournissait un moyen de récupérer sa taille. 
+
+Dans mon code, j'ai utilisé un tableau pour stocké la grille que j'ai initialisé en mettant toutes les valeurs à -2. Je continue d'iterer tant que j'ai des valeurs à -2 dans mon tableau. 
+
 
 Question 3: 
 
-Si nous avions utilisé un langage avec des structures de données complètes, c'est à dire des listes qui donne la taille de la liste quand on le demande, j'aurais utilisé des listes. Or, ici, que ce soit les DList ou les SList. , ce n'est pas le cas. 
+Si nous avions utilisé un langage avec des structures de données complètes, c'est à dire des listes qui donne la taille de la liste quand on le demande, j'aurais utilisé des listes. Or, ici, que ce soit les DList ou les SList, ce n'est pas le cas. 
 
-J'ai donc utilisé un tableau pour stocker tout les noeuds découvert par le noeud qui remplit le tableau et un autre tableau 2D celui-ci pour connaitre les voisins de chaque noeud. 
+J'ai donc utilisé un tableau pour stocker tout les noeuds découverts par le noeud qui remplit le tableau et un autre tableau 2D celui-ci pour connaitre les voisins de chaque noeud. 
 
 Question 4 : 
 
-Sur une moyenne de ... executions : </br>
-Pour une grille de 4 x 4 il y a X messages échangés. </br>
-Pour une grille de 10 x 10 il y a X messages échangés. </br>
-Pour une grille de 50 x 50 il y a X messages échangés.
+Sur une moyenne de 1000 executions : </br>
+Pour une grille de 4 x 4 il y a 2 005 messages échangés. Le minimum est de 1 026 messages alors que le maximum est de 7 235 messages.</br>
 
+
+La consigne demandait de réaliser cette moyenne sur des grilles 10x10 et 50x50, malheureusement, mon PC ne peut pas réalisé ces tentatives. Au maximum, j'ai pu faire sur une grille 7 x 7. Voici les résultats. </br>
+
+Pour une grille de 7 x 7 il y a 280 102 messages échangés. Le minimum est de 132 036 messages alors que le maximum est de 1 308 530 messages. </br>
+
+Cette limite matériel repose sur le processeur, le nombre de coeur dont il est équipé ainsi que les processus déjà en cours. 
+
+
+
+Exercice 1:
+
+Question 1:
+
+<a href="./exercice2.d">(voir code, fichier exercice2.d)</a>
+
+Question 2:
+
+ur une moyenne de 1000 executions : </br>
+Pour une grille de 4 x 4 il y a 49 messages échangés. Le minimum est de 49 messages alors que le maximum est de 49 messages.</br>
+
+Pour une grille de 7 x 7 il y a 169 messages échangés. Le minimum est de 169 messages alors que le maximum est de 169 messages. </br>
+
+Pour une grille de 10 x 10 il y a 361 messages échangés. Le minimum est de 361 messages alors que le maximum est de 361 messages. </br>
+
+Pour une grille de 45 x 45 il y a 7921 messages échangés. Le minimum est de 7921 messages alors que le maximum est de 7921 messages. </br>
+
+Je me suis arrêté à 45, car j'ai une erreur à la création de thread au-delà.
+
+
+Question 3: 
+
+En rajoutant un aléatoire d'environs ~50 millisecondes sur certains noeuds, de temps en temps il n'y a pas  de changement. En effet, le noeud recevra le message, attendra et le transmettra à ces voisins, ne changeant absolument rien au déroulé du programme. 
+
+Sur une moyenne de 1000 executions : </br>
+Pour une grille de 4 x 4 il y a 49 messages échangés. Le minimum est de 49 messages alors que le maximum est de 49 messages.</br>
+
+Pour une grille de 10 x 10 il y a 361 messages échangés. Le minimum est de messages 361 alors que le maximum est de 361 messages. </br>
+
+Pour une grille de 45 x 45 il y a 7921 messages échangés. Le minimum est de messages 7921 alors que le maximum est de 7921 messages.
+
+Question 4 : 
+
+Pas concerné. 
+
+
+Exercice 3
+
+Question 1 : 
+
+Dans un premier temps, on reprend l'algorithme de l'exercice précédant en innondant le réseau. Ce qui sera envoyé sera de la forme : 
+(message, IdDeLaSource)
+
+Une fois qu'un noeud à reçu le message, il envoie un acquittement au noeud qui lui envoyé (tout en le propageant, comme avant).
+ACK de la forme : (ACK, destinataire, IdACK)
+ACK = "message de l'ACK
+destinataire = IdDeLaSources
+IdACK = l'ID du créateur de l'ACK pour que le premier emeteur sache de qui acquitte. 
+
+Ce qui donne:
+
+<ul>
+        <li>Un noeud innonde le réseau
+        <li>Les noeuds qui recoivent le message de base le transmette à tout leurs autres voisins
+        <li>Quand je reçoit un acquitement, je le renvoie à tout mes voisins sauf l'expediteur.
+        <li>Le noeud qui a innondé le réseau connai
+    </ul>

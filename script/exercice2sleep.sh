@@ -5,7 +5,7 @@ let "sum = 0"
 #dmd -of=./out/exercice2sleep  ../exercice2sleep.d
 for i in {1..1000}
 do
-    let current=$(./out/exercice2sleep)
+    let current=$(./out/exercice2sleep3)
     let "sum = sum + current"
     if [ $min -gt $current ]
     then    

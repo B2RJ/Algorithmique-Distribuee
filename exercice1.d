@@ -38,7 +38,7 @@ void receiveAllFinalization(Noeud [][] childTid, int row, int col)
     Cette fonction me permet de savoir si j'ai toutes les informations de la grille.
 */
 
-bool myCanFind(int[4][16] nodesNeighborhood) {
+bool myCanFind(int[4][49] nodesNeighborhood) {
     if (nodesNeighborhood[][].find([-2,-2,-2,-2]) != nodesNeighborhood[][].find([-18,-18,-18,-18])) {
         return true;
     }  
@@ -80,7 +80,7 @@ void spawnedFunc(int myId, int n)
     //Du coup, je dois définir moi même le tableau. 
     // Avec un langage différent, j'aurais utilisé une variable au lieu du du nombre de noeud, 
     //ça m'aurait eviter de devoir le changer à chaque changement de taille
-    int[4][16] nodesNeighborhood = -2;
+    int[4][49] nodesNeighborhood = -2;
     for(int i = 0; i<4 ; i++)
     {
         nodesNeighborhood[myId][i] = nodesBasic[i+1]; 
@@ -182,8 +182,8 @@ void spawnedFunc(int myId, int n)
 void main()
 {
     // number of child processes (must be a number that can be sqrt)
-    int row = 4;
-    int col = 4;
+    int row = 7;
+    int col = 7;
     int n = row * col;
 
     // spawn threads (child processes)
@@ -215,7 +215,7 @@ void main()
 
     int nbMessageTotal = 0;
     int i = 0;
-    while (i<16) {
+    while (i<49) {
         receive(
             (int nbMessage)
             {

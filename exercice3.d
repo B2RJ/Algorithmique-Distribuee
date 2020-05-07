@@ -5,11 +5,6 @@ import core.time;
 import std.algorithm;
 import std.math;
 
-import std.algorithm.comparison : among, equal;
-import std.range : iota;
-
-import std.Random;
-
 import core.thread;
 
 import std.container : DList;
@@ -45,7 +40,7 @@ void receiveAllFinalization(Noeud [][] childTid, int row, int col)
     Cette fonction me permet de savoir si j'ai toutes les informations de la grille.
 */
 
-bool myCanFind(int[4][2025] nodesNeighborhood) {
+bool myCanFind(int[4][2116] nodesNeighborhood) {
     if (nodesNeighborhood[][].find([-2,-2,-2,-2]) != nodesNeighborhood[][].find([-18,-18,-18,-18])) {
         return true;
     }  
@@ -89,7 +84,7 @@ void spawnedFunc(int myId, int n)
             if(nodesBasic[i+1] != -1)
             {
                 monCptMessage = monCptMessage + 1;
-                send(neighbourRecipient[i], "Coucou", myId);
+                send(neighbourRecipient[i], "Coucou", myId, myId);
             }
         }
     } else {
@@ -102,15 +97,12 @@ void spawnedFunc(int myId, int n)
                 {   
                     if(nodesBasic[i+1] != -1 && IdSources != nodesBasic[i+1])
                     {
-                        monCptMessage = monCptMessage + 1;
-                        
-                        //Random pour savoir si on sleep ou pas
-                        auto rnd = Random(42);
-                        auto myRnd = uniform(0, 16, rnd);
-                        if (myRnd%2 == 0) {
-                            Thread.sleep( dur!("msecs")( 50+myRnd ) );
-                        }    
+                        monCptMessage = monCptMessage + 1;  
                         send(neighbourRecipient[i], message, myId);
+                    }
+                    if(IdSources != nodesBasic[i+1]) {
+                        monCptMessage = monCptMessage + 1;
+                        send(neighbourRecipient[i], "ACK", myId, );
                     }
                 }
             }
@@ -133,8 +125,8 @@ void spawnedFunc(int myId, int n)
 void main()
 {
     // number of child processes (must be a number that can be sqrt)
-    int row = 45;
-    int col = 45;
+    int row = 46;
+    int col = 46;
     int n = row * col;
 
     // spawn threads (child processes)
@@ -166,7 +158,7 @@ void main()
 
     int nbMessageTotal = 0;
     int i = 0;
-    while (i<2025) {
+    while (i<2116) {
         receive(
             (int nbMessage)
             {
