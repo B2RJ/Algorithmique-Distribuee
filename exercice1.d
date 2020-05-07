@@ -27,17 +27,45 @@ void receiveAllFinalization(Noeud [][] childTid, int row, int col)
 }
 
 
-bool nodesNeighborhoodComplete(int* nodesNeighborhood){
-    for (int i = 0 ; i<4 ; i++){
-        for (int j = 0 ; j <16 ; j++) {
-            if(nodesNeighborhood[i][j] == -2){
+bool nodesNeighborhoodComplete(int[4][16]* nodesNeighborhood, int myId){
+    if (myId == 2) {
+                 //writeln("Debut");
+    }    
+    for (int i = 1 ; i<4 ; i++){
+        for (int j = 1 ; j <16 ; j++) {
+            if (myId == 2) {
+                //writeln("==>", nodesNeighborhood[i][j]);
+            }    
+            if(nodesNeighborhood[i][j] == [-2, -2, -2, -2]){
+                if (myId == 2) {
+                 //writeln("Fin");
+                } 
                 return true;
             }
         }
     }
+    if (myId == 2) {
+        //writeln("Fin");
+    } 
     return false;
 }
 
+/*
+    Bon, ce coup ci c'est la classe "Arrays" qui est pas finie. 
+    Pour une raison sans doute très pertinentes, il y a aucun moyen de savoir si elle contient une valeur
+    avec les fonctions membres. Ou alors, j'ai pas trouvé et les gens sur les forums non plus. 
+    Bref, j'ai donc conçu cette fonction pas piquée des hannetons afin de rechercher si dans mon tableau
+    j'avais une ligne comme celle-ci [-2,-2,-2,-2].
+    J'ai comparé avec la ligne [-18,-18,-18,-18] qui N'est PAS présente dans mon tableau. 
+    Cette fonction me permet de savoir si j'ai toutes les informations de la grille.
+*/
+
+bool myCanFind(int[4][16] nodesNeighborhood) {
+    if (nodesNeighborhood[][].find([-2,-2,-2,-2]) != nodesNeighborhood[][].find([-18,-18,-18,-18])) {
+        return true;
+    }  
+    return false;   
+}
 
 void spawnedFunc(int myId, int n)
 {
@@ -100,10 +128,15 @@ void spawnedFunc(int myId, int n)
 
     //Il n'y a pas contains() ou canFind() sur un tableau 2D, 
     //on va donc rendre le code encore moins lisible
-    int * p;
-    p = nodesNeighborhoodComplete;
+    int[4][16] * p;
+    p = &nodesNeighborhood;
+    bool a = nodesNeighborhoodComplete(p, myId);
+    if(myId == 2) {
+        //writeln("Je suis: ", myId, " et le booleen est a: ", a, " voici mon tableau", nodesNeighborhood);
+    }
+    bool b = myCanFind(nodesNeighborhood);
     //bool a = nodesNeighborhoodComplete(p);
-    while(true)
+    while(myCanFind(nodesNeighborhood))
     {
         receive
         (
@@ -144,7 +177,7 @@ void spawnedFunc(int myId, int n)
                     
                 }
 
-                writeln(hisId);
+                //writeln(hisId);
                 nodesNeighborhood[hisId][0] = uneighbor.lid;
                 nodesNeighborhood[hisId][1] = dneighbor.lid;
                 nodesNeighborhood[hisId][2] = lneighbor.lid;
@@ -159,11 +192,10 @@ void spawnedFunc(int myId, int n)
                     }
                 }
             }
-
         );
     }
     //writeln("Je suis: ", myId, " et voici mon tableau: ", nodes);
-    if(myId==0) {
+    if(true) {
         writeln("Je suis: ", myId, " et voici mon tableau: ", nodes);
         writeln("Je suis: ", myId, " et voici mon tableau: ", nodesNeighborhood);
         }
