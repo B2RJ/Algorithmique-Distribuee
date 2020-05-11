@@ -36,11 +36,10 @@ void receiveAllFinalization(Noeud [][] childTid, int row, int col)
 
 
 /*
-    Bon, ce coup ci c'est la classe "Arrays" qui est pas finie. 
-    Pour une raison sans doute très pertinentes, il y a aucun moyen de savoir si elle contient une valeur
+    Pour une raison sans doute très pertinentes, il y a aucun moyen de savoir si la classe array contient une valeur
     avec les fonctions membres. Ou alors, j'ai pas trouvé et les gens sur les forums non plus. 
-    Bref, j'ai donc conçu cette fonction pas piquée des hannetons afin de rechercher si dans mon tableau
-    j'avais une ligne comme celle-ci [-2,-2,-2,-2].
+    j'ai  conçu cette fonction pas piquée des hannetons afin de rechercher si dans mon tableau
+    j'avais une ligne comme celle-ci [-2,-2,-2,-2] qui est la remplie à l'initialisation.
     J'ai comparé avec la ligne [-18,-18,-18,-18] qui N'est PAS présente dans mon tableau. 
     Cette fonction me permet de savoir si j'ai toutes les informations de la grille.
 */
@@ -73,7 +72,7 @@ void spawnedFunc(int myId, int n)
     // Il est à 1 car il y a le message du père
     int monCptMessage = 1;
     
-    // Creation des deux tableaux : Celui qui recence les noeuds et Celui qui recence leur voisin
+    // Creation des deux tableaux : Celui qui recence les noeuds et celui qui recence leur voisin
     Noeud moi;
     moi.lid = myId;
 
@@ -82,7 +81,7 @@ void spawnedFunc(int myId, int n)
     // Tableau de destinataire
     Tid[4] neighbourRecipient = [upNeighbor.tid, downNeighbor.tid, leftNeighbor.tid, rightNeighbor.tid];
 
-    // Envoie du message à mes voisin
+    // Envoie du message à mes voisins
     if (myId == 5) {
         for(int i = 0; i<4 ; i++)
         {   
@@ -104,7 +103,7 @@ void spawnedFunc(int myId, int n)
                     {
                         monCptMessage = monCptMessage + 1;
                         
-                        //Random pour savoir si on sleep ou pas
+                        //Random pour savoir si on fait une pause entre chaque envoie
                         auto rnd = Random(42);
                         auto myRnd = uniform(0, 16, rnd);
                         if (myRnd%2 == 0) {
@@ -115,11 +114,7 @@ void spawnedFunc(int myId, int n)
                 }
             }
         );
-    }    
-
-    // if(myId == 2) {
-    //     writeln("Je suis: ", myId, " voici mon tableau", nodesNeighborhood);
-    // }
+    }  
 
     send(ownerTid, monCptMessage);
 
