@@ -31,20 +31,28 @@ void receiveAllFinalization(Noeud [][] childTid, int row, int col)
 
 
 /*
-    Bon, ce coup ci c'est la classe "Arrays" qui est pas finie. 
-    Pour une raison sans doute très pertinentes, il y a aucun moyen de savoir si elle contient une valeur
+    Pour une raison sans doute très pertinente, il y a aucun moyen de savoir si la classe array contient une valeur
     avec les fonctions membres. Ou alors, j'ai pas trouvé et les gens sur les forums non plus. 
-    Bref, j'ai donc conçu cette fonction pas piquée des hannetons afin de rechercher si dans mon tableau
-    j'avais une ligne comme celle-ci [-2,-2,-2,-2].
+    j'ai  conçu cette fonction pas piquée des hannetons afin de rechercher si dans mon tableau
+    j'avais une ligne comme celle-ci [-2,-2,-2,-2] qui est la remplie à l'initialisation.
     J'ai comparé avec la ligne [-18,-18,-18,-18] qui N'est PAS présente dans mon tableau. 
     Cette fonction me permet de savoir si j'ai toutes les informations de la grille.
 */
 
-bool myCanFind(int[4][2116] nodesNeighborhood) {
+bool myCanFind(int[4][2025] nodesNeighborhood) {
     if (nodesNeighborhood[][].find([-2,-2,-2,-2]) != nodesNeighborhood[][].find([-18,-18,-18,-18])) {
         return true;
     }  
     return false;   
+}
+
+bool end(bool[4] msgReceived) {
+    for(int i = 0 ; i < 4 ; i++) {
+        if(msgReceived[i] == false){
+            return true;
+        }
+    }
+    return false;
 }
 
 void spawnedFunc(int myId, int n)
@@ -72,61 +80,113 @@ void spawnedFunc(int myId, int n)
     Noeud moi;
     moi.lid = myId;
 
+    //Tableau d'id de base
     int[] nodesBasic = [myId, upNeighbor.lid, downNeighbor.lid, leftNeighbor.lid, rightNeighbor.lid];
-    
-    // Tableau de destinataire
+   
+    //Indice pour savoir combien de message on a reçu
+    bool[4] msgReceived = [false, false, false, false];
+    for (int i = 1 ; i < 5 ; i++) {
+        if (nodesBasic[i] == -1) {
+            msgReceived[i-1] = true;
+        }
+    }
+    // Indice du voisin "père"
+    int father = -1;
+
+    //Un booleen pour savoir si on a dé&jà reçu le message
+    bool receivedBefore = false;
+
+    // Tableau de destinataires
     Tid[4] neighbourRecipient = [upNeighbor.tid, downNeighbor.tid, leftNeighbor.tid, rightNeighbor.tid];
 
-    // Envoie du message à mes voisin
+    // Envoie du message à mes voisins
     if (myId == 5) {
+        father = myId;
         for(int i = 0; i<4 ; i++)
         {   
             if(nodesBasic[i+1] != -1)
             {
                 monCptMessage = monCptMessage + 1;
-                send(neighbourRecipient[i], "Coucou", myId, myId);
+                send(neighbourRecipient[i], "Coucou", myId);
             }
         }
-    } else {
+        
+    }
+    while(end(msgReceived)){
         receive
         (
             (string message, int IdSources)
             {
-                // Envoie du message à mes voisins, sauf celui qui me l'a envoyé
-                for(int i = 0; i<4 ; i++)
-                {   
-                    if(nodesBasic[i+1] != -1 && IdSources != nodesBasic[i+1])
-                    {
-                        monCptMessage = monCptMessage + 1;  
-                        send(neighbourRecipient[i], message, myId);
+                if(message == "Coucou") {
+                    if(!receivedBefore) {
+                        //On passe le booleen à true
+                        receivedBefore = true;
+                        // On enregistre qui est son "père"
+                        father = IdSources;
+                        // Envoie du message à mes voisins, sauf celui qui me l'a envoyé
+                        for(int i = 0; i<4 ; i++)
+                        {   
+                            if(nodesBasic[i+1] != -1 && IdSources != nodesBasic[i+1])
+                            {
+                                monCptMessage = monCptMessage + 1;  
+                                send(neighbourRecipient[i], message, myId);
+                            }
+                            if(nodesBasic[i+1] == IdSources) {
+                                // On passe à true le noeud qui nous a transmis le message
+                                if(msgReceived[i]== false) {
+                                    msgReceived[i] = true;
+                                }
+                            }
+                        }
                     }
-                    if(IdSources != nodesBasic[i+1]) {
-                        monCptMessage = monCptMessage + 1;
-                        send(neighbourRecipient[i], "ACK", myId, );
-                    }
+                    else {
+                        for(int i = 0 ; i<4 ; i++) {
+                            if(IdSources == nodesBasic[i+1]) {
+                                // On passe le booleen de l'expéditeur à true.
+                                if(msgReceived[i]== false) {
+                                    msgReceived[i] = true;
+                                }
+                                monCptMessage = monCptMessage + 1;
+                                send(neighbourRecipient[i], "Deja reçu", myId);
+                            }
+                        }
+                    }    
+                }
+                else {
+                    //Si c'est pas "Coucou", ça ne peut être que "Deja reçu" ou un "ACK" et le résultat est le meme
+                    for(int i = 0 ; i<4 ; i++) {
+                            if(IdSources == nodesBasic[i+1]) {
+                                // On passe le booleen de l'expéditeur à true.
+                                msgReceived[i] = true;
+                            }
+                        }
                 }
             }
         );
+    }  
+
+    //J'ai donc reçu les acquitements de tout mes voisins, je peux envoyer à mon père l'ack.
+    // J'envoie "myId" uniquement pour pas avoir à recoder un autre type de message
+    for(int i = 0 ; i<4 ; i++) {
+        if(father == nodesBasic[i+1]) {
+            monCptMessage = monCptMessage + 1;
+            send(neighbourRecipient[i], "ACK", myId);
+        }
     }    
 
-    // if(myId == 2) {
-    //     writeln("Je suis: ", myId, " voici mon tableau", nodesNeighborhood);
-    // }
-
+    //On envoie le nombre de message échangés
     send(ownerTid, monCptMessage);
 
     // end of your code
-
     send(ownerTid, CancelMessage());
-    
 }
 
 
 void main()
 {
     // number of child processes (must be a number that can be sqrt)
-    int row = 46;
-    int col = 46;
+    int row = 45;
+    int col = 45;
     int n = row * col;
 
     // spawn threads (child processes)
@@ -158,7 +218,7 @@ void main()
 
     int nbMessageTotal = 0;
     int i = 0;
-    while (i<2116) {
+    while (i<2025) {
         receive(
             (int nbMessage)
             {
