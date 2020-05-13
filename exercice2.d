@@ -31,11 +31,10 @@ void receiveAllFinalization(Noeud [][] childTid, int row, int col)
 
 
 /*
-    Bon, ce coup ci c'est la classe "Arrays" qui est pas finie. 
-    Pour une raison sans doute très pertinentes, il y a aucun moyen de savoir si elle contient une valeur
+    Pour une raison sans doute très pertinente, il y a aucun moyen de savoir si la classe array contient une valeur
     avec les fonctions membres. Ou alors, j'ai pas trouvé et les gens sur les forums non plus. 
-    Bref, j'ai donc conçu cette fonction pas piquée des hannetons afin de rechercher si dans mon tableau
-    j'avais une ligne comme celle-ci [-2,-2,-2,-2].
+    j'ai  conçu cette fonction pas piquée des hannetons afin de rechercher si dans mon tableau
+    j'avais une ligne comme celle-ci [-2,-2,-2,-2] qui est la remplie à l'initialisation.
     J'ai comparé avec la ligne [-18,-18,-18,-18] qui N'est PAS présente dans mon tableau. 
     Cette fonction me permet de savoir si j'ai toutes les informations de la grille.
 */
