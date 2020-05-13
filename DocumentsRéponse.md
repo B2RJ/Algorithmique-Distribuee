@@ -126,20 +126,38 @@ Exercice 3
 
 Question 1 : 
 
-Dans un premier temps, on reprend l'algorithme de l'exercice précédant en innondant le réseau. Ce qui sera envoyé sera de la forme : 
-(message, IdDeLaSource)
+Dans un premier temps, le noeud émetteur (v) émet le message à ses voisins. 
+Quand chaque voisin reçoit le message pour la première fois, il enregistre qu'il a reçu le message de v et il envoie le message à tout ses AUTRES voisins. 
 
-Une fois qu'un noeud à reçu le message, il envoie un acquittement au noeud qui lui envoyé (tout en le propageant, comme avant).
-ACK de la forme : (ACK, destinataire, IdACK)
-ACK = "message de l'ACK
-destinataire = IdDeLaSources
-IdACK = l'ID du créateur de l'ACK pour que le premier emeteur sache de qui acquitte. 
+Quand chaque noeud reçoit le message une autre fois, il retourne à l'expediteur qu'il l'a déjà reçu. 
 
-Ce qui donne:
+A chaque fois qu'un noeud reçoit un message d'un de ses voisins il le note. 
+Une fois que tout ses voisins lui ont répondu, il répond au premier noeud qui lui a envoyé le message. 
 
-<ul>
-        <li>Un noeud innonde le réseau
-        <li>Les noeuds qui recoivent le message de base le transmette à tout leurs autres voisins
-        <li>Quand je reçoit un acquitement, je le renvoie à tout mes voisins sauf l'expediteur.
-        <li>Le noeud qui a innondé le réseau connai
-    </ul>
+Ainsi, de fil en aiguille, le noeud emetteur saura que tout le monde à reçu le message. 
+
+Question 2 : 
+
+<a href="./exercice3.d">(voir code, fichier exercice3.d)</a>
+
+Question 3 : 
+
+Le nombre de message à augmenté. 
+Nous avons maintenant, sur une moyenne de 1000 executions : </br>
+Pour une grille de 4 x 4 il y a 82 messages échangés. Le minimum est de 82 messages alors que le maximum est de 88 messages. Je tiens à souligner que j'ai parcouru les résultats pendant l'execution de mon script. J'ai eu quelques fois des nombres au-dessus de 82 tels que 85, 87 et 88. Moins de 20 fois en tout.
+Il y a donc eu 82-48 = 34 messages supplémentaires</br>
+
+
+Pour une grille de 10 x 10 il y a 622 messages échangés. Le minimum est de messages 622 alors que le maximum est de 626 messages. Une fois de plus il y a eu de légères variations.</br>
+
+Pour une grille de 45 x 45 il y a 13 817 messages échangés. Le minimum est de messages 13 817 alors que le maximum est de  messages.
+
+
+Question 4 : 
+
+Si chaque noeud connait le graphe, l'un des algorithmes possible serait le suivant. 
+
+Le noeud emetteur émet le messages à ses voisins. Quand un noeud reçoit le message, il l'acquitte au près du noeud qui lui a envoyé. Ce noeud fait remonter l'acquittement par le noeud qui lui a envoyé le premier message et ainsi de suite. 
+Comme le noeud émetteur connait le graphe, il a juste à compter les acquitements reçu et en comparant le comptage avec le nombre de noeud. 
+
+On pourrait améliorer l'algorithme en incorporant au message d'acquittement l'id du noeud qui envoie l'acquitement. Ainsi le noeud emetteur saurait exactement qui a reçu le message et qui ne l'a pas reçu. Cette amélioration permettrait de ré-emmetre le message uniquement vers les noeuds qui ne l'ont pas reçu. 
