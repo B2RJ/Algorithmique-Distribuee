@@ -150,7 +150,7 @@ Il y a donc eu 82-48 = 34 messages supplémentaires</br>
 
 Pour une grille de 10 x 10 il y a 622 messages échangés. Le minimum est de messages 622 alors que le maximum est de 626 messages. Une fois de plus il y a eu de légères variations.</br>
 
-Pour une grille de 45 x 45 il y a 13 817 messages échangés. Le minimum est de messages 13 817 alors que le maximum est de  messages.
+Pour une grille de 45 x 45 il y a 13 817 messages échangés. Le minimum est de messages 13 817 alors que le maximum est de 13817 messages. Il n'y a pas eu de variations ici. 
 
 
 Question 4 : 
