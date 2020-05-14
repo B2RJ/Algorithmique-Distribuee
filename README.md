@@ -1,6 +1,6 @@
 <p>Les réponses sont présentes dans le dossier <a href=./report>report</a>.
 
-<p>Toutes les commandes suivantes sont à faire depuis la racine du dossier</p>
+<p>Toutes les commandes suivantes sont à faire depuis la racine du dossier.</p>
 
 <p>Pour compiler l'exercice 1 : <code>dmd -of=./out/exercice1 ./src/exercice1.d</code><br>
 Pour exécuter l'exercice 1 : <code>./out/exercice1</code><br>
@@ -16,3 +16,6 @@ Exercice 1 : <code>./script/exercice1.sh</code><br>
 Exercice 2 : <code>./script/exercice2.sh</code><br>
 Exercice 2 en prenant en compte les pause : <code>./script/exercice2sleep.sh</code><br>
 Exercice 3 : <code>./script/exercice3.sh</code><br></p>
+
+
+<p>Le dossier other contient le fichier XMind de l'image présente dans le rapport si vous voulez l'ouvrir depuis l'application.</p>
