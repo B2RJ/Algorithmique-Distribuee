@@ -17,17 +17,17 @@
 
 <p>id envoie à voisin : (id, [voisin du haut, voisin du bas, voisin gauche, voisin droit])
 
-0 envoie à 4 : (0,[-1, 4, -1, 1]) //-1 signifie qu'il n'y pas de voisin </br> 
-0 envoie à 1 : (0,[-1, 4, -1, 1]) </br> 
-1 envoie à 5 : (1,[-1, 5, 0, 2]) </br> 
-1 envoie à 0 : (1,[-1, 5, 0, 2]) </br> 
-1 envoie à 2 : (1,[-1, 5, 0, 2]) </br> 
-et ainsi de suite, au milieu de la grille on aura </br> 
-5 envoie à 1 : (5,[1, 9, 4, 6]) </br> 
-5 envoie à 9 : (5,[1, 9, 4, 6]) </br> 
-5 envoie à 4 : (5,[1, 9, 4, 6]) </br> 
-5 envoie à 6 : (5,[1, 9, 4, 6]) </br> 
-toujours la même logique </br></p>
+0 envoie à 4 : (0,[-1, 4, -1, 1]) //-1 signifie qu'il n'y pas de voisin <br> 
+0 envoie à 1 : (0,[-1, 4, -1, 1]) <br> 
+1 envoie à 5 : (1,[-1, 5, 0, 2]) <br> 
+1 envoie à 0 : (1,[-1, 5, 0, 2]) <br> 
+1 envoie à 2 : (1,[-1, 5, 0, 2]) <br> 
+et ainsi de suite, au milieu de la grille on aura <br> 
+5 envoie à 1 : (5,[1, 9, 4, 6]) <br> 
+5 envoie à 9 : (5,[1, 9, 4, 6]) <br> 
+5 envoie à 4 : (5,[1, 9, 4, 6]) <br> 
+5 envoie à 6 : (5,[1, 9, 4, 6]) <br> 
+toujours la même logique <br></p>
 
 <h4>Etape 2 : Chaque noeud reçoit pour la première fois une paire (id, liste de voisin )</h4> 
 
@@ -36,15 +36,15 @@ toujours la même logique </br></p>
         <li>En mettant à jour sa liste de noeuds 
         <li>En mettant à jour la liste de lien du noeud reçu.
     </ul>
-Puis retransmet à chacun de ses voisins l'information (sauf à celui qui vient de la lui envoyer).</br> 
+Puis retransmet à chacun de ses voisins l'information (sauf à celui qui vient de la lui envoyer).<br> 
 Dans notre cas, ça donnerait la situation suivante pour le noeud 0. 
-</br> 
-0 envoie à 1 et à 4 sa paire (id + liste de voisin). </br> 
-1 envoie la paire de 0 à 2 et 5. </br> 
-4 envoie la paire de 0 à 5 et 8 </br> 
-2 envoie la paire de 0 à 3 et 6 </br> 
-5 envoie la paire de 0 à 4 8 </br> 
-8 envoie la paire de 0 à 5 et 8 </br> </p>
+<br> 
+0 envoie à 1 et à 4 sa paire (id + liste de voisin). <br> 
+1 envoie la paire de 0 à 2 et 5. <br> 
+4 envoie la paire de 0 à 5 et 8 <br> 
+2 envoie la paire de 0 à 3 et 6 <br> 
+5 envoie la paire de 0 à 4 8 <br> 
+8 envoie la paire de 0 à 5 et 8 <br> </p>
 
 ![arbre]
 
@@ -76,8 +76,8 @@ Dans notre cas, ça donnerait la situation suivante pour le noeud 0.
 <p>Pour une grille de 7 x 7 il y a 280 102 messages échangés. Le minimum est de 132 036 messages alors que le maximum est de 1 308 530 messages. </p>
 <p>Cette limite matériel repose sur le processeur, le nombre de coeur dont il est équipé ainsi que les processus déjà en cours. </p>
 
-</br>
-</br>
+<br>
+<br>
 <h2>Exercice 2:</h2>
 
 <h3>Question 1:</h3>
@@ -86,7 +86,7 @@ Dans notre cas, ça donnerait la situation suivante pour le noeud 0.
 
 <h3>Question 2:</h3>
 
-<p>Sur une moyenne de 1000 executions : </br>
+<p>Sur une moyenne de 1000 executions : <br>
 Pour une grille de 4 x 4 il y a 49 messages échangés. Le minimum est de 49 messages alors que le maximum est de 49 messages.</p>
 <p>Pour une grille de 7 x 7 il y a 169 messages échangés. Le minimum est de 169 messages alors que le maximum est de 169 messages. </p>
 <p>Pour une grille de 10 x 10 il y a 361 messages échangés. Le minimum est de 361 messages alors que le maximum est de 361 messages. </p>
@@ -97,7 +97,7 @@ Pour une grille de 4 x 4 il y a 49 messages échangés. Le minimum est de 49 mes
 <h3>Question 3:</h3>
 
 <p>En rajoutant un temps aléatoire d'environs ~50 millisecondes sur certains noeuds tiré aléatoirement avant l'expedition à certains voisins tirés aussi aléatoirement, il n'y a pas  de changement. En effet, le noeud recevra le message, attendra et le transmettra à ces voisins, ne changeant absolument rien au déroulé de l'algorithme.</p> 
-<p>Sur une moyenne de 1000 executions : </br>
+<p>Sur une moyenne de 1000 executions : <br>
 Pour une grille de 4 x 4 il y a 49 messages échangés. Le minimum est de 49 messages alors que le maximum est de 49 messages.</p>
 <p>Pour une grille de 10 x 10 il y a 361 messages échangés. Le minimum est de messages 361 alors que le maximum est de 361 messages. </p>
 <p>Pour une grille de 45 x 45 il y a 7921 messages échangés. Le minimum est de messages 7921 alors que le maximum est de 7921 messages.</p>
@@ -106,8 +106,8 @@ Pour une grille de 4 x 4 il y a 49 messages échangés. Le minimum est de 49 mes
 
 <p>Pas concerné.</p> 
 
-</br>
-</br>
+<br>
+<br>
 <h2>Exercice 3</h2>
 
 <h3>Question 1 : </h3>
@@ -126,7 +126,7 @@ Une fois que tout ses voisins lui ont répondu, il répond au premier noeud qui 
 <h3>Question 3 : </h3>
 
 <p>Le nombre de message à augmenté.</p> 
-<p>Nous avons maintenant, sur une moyenne de 1000 executions : </br>
+<p>Nous avons maintenant, sur une moyenne de 1000 executions : <br>
 Pour une grille de 4 x 4 il y a 82 messages échangés. Le minimum est de 82 messages alors que le maximum est de 88 messages. Je tiens à souligner que j'ai parcouru les résultats pendant l'execution de mon script. J'ai eu quelques fois des nombres au-dessus de 82 tels que 85, 87 et 88. Moins de 20 fois en tout.
 Il y a donc eu 82-48 = 34 messages supplémentaires</p>
 <p>Pour une grille de 10 x 10 il y a 622 messages échangés. Le minimum est de messages 622 alors que le maximum est de 626 messages. Une fois de plus il y a eu de légères variations.</p>
