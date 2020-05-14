@@ -48,7 +48,7 @@ Dans notre cas, ça donnerait la situation suivante pour le noeud 0.
 
 ![arbre]
 
-[arbre]: ./images/Ex1Q1.png "arbre"
+[arbre]: ../images/Ex1Q1.png "arbre"
 
 <p>Nous pouvons tracer le même genre d'arbre pour chacun des noeuds du graphe.</p>
 
@@ -66,7 +66,7 @@ Dans notre cas, ça donnerait la situation suivante pour le noeud 0.
 
 <h3>Question 4 : </h3>
 
-<a href="./exercice1.d">(voir code, fichier exercice2.d)</a>
+<a href="../src/exercice1.d">(voir code, fichier exercice2.d)</a>
 
 <h3>Question 5 : </h3>
 
@@ -82,7 +82,7 @@ Dans notre cas, ça donnerait la situation suivante pour le noeud 0.
 
 <h3>Question 1:</h3>
 
-<a href="./exercice2.d">(voir code, fichier exercice2.d)</a>
+<a href="../src/exercice2.d">(voir code, fichier exercice2.d)</a>
 
 <h3>Question 2:</h3>
 
@@ -121,7 +121,7 @@ Une fois que tout ses voisins lui ont répondu, il répond au premier noeud qui 
 
 <h3>Question 2 : </h3>
 
-<a href="./exercice3.d">(voir code, fichier exercice3.d)</a>
+<a href="../src/exercice3.d">(voir code, fichier exercice3.d)</a>
 
 <h3>Question 3 : </h3>
 

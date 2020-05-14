@@ -2,7 +2,7 @@
 let "min = 1000000"
 let "max = 0"
 let "sum = 0"
-#dmd -of=./out/exercice1  ../exercice1.d
+dmd -of=./out/exercice1  ./src/exercice1.d
 for i in {1..1000}
 do
     let current=$(./out/exercice1)

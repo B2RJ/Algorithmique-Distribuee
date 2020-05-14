@@ -28,15 +28,13 @@ void receiveAllFinalization(Noeud [][] childTid, int row, int col)
     }
 }
 
-
-
 /*
     J'ai conçu cette fonction pas piquée des hannetons afin de rechercher si dans mon tableau
     j'avais une ligne comme celle-ci [-2,-2,-2,-2].
     J'ai comparé avec la ligne [-18,-18,-18,-18] qui N'est PAS présente dans mon tableau. 
     Cette fonction me permet de savoir si j'ai toutes les informations de la grille.
 */
-bool myCanFind(int[4][2116] nodesNeighborhood) {
+bool myCanFind(int[4][16] nodesNeighborhood) {
     if (nodesNeighborhood[][].find([-2,-2,-2,-2]) != nodesNeighborhood[][].find([-18,-18,-18,-18])) {
         return true;
     }  
@@ -110,8 +108,8 @@ void spawnedFunc(int myId, int n)
 void main()
 {
     // number of child processes (must be a number that can be sqrt)
-    int row = 46;
-    int col = 46;
+    int row = 4;
+    int col = 4;
     int n = row * col;
 
     // spawn threads (child processes)
@@ -142,7 +140,7 @@ void main()
 
     int nbMessageTotal = 0;
     int i = 0;
-    while (i<2116) {
+    while (i<16) {
         receive(
             (int nbMessage)
             {
