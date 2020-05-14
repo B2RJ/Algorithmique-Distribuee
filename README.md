@@ -1,5 +1,7 @@
 <p>Les réponses sont présentes dans le dossier <a href=./report>report</a>.
 
+<p>Toutes les commandes suivantes sont à faire depuis la racine du dossier</p>
+
 <p>Pour compiler l'exercice 1 : <code>dmd -of=./out/exercice1 ./src/exercice1.d</code><br>
 Pour exécuter l'exercice 1 : <code>./out/exercice1</code><br>
 Pour compiler l'exercice 2 : <code>dmd -of=./out/exercice2 ./src/exercice2.d</code><br>
