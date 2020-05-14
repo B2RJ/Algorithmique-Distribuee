@@ -28,17 +28,12 @@ void receiveAllFinalization(Noeud [][] childTid, int row, int col)
     }
 }
 
-
-
 /*
-    Pour une raison sans doute très pertinente, il y a aucun moyen de savoir si la classe array contient une valeur
-    avec les fonctions membres. Ou alors, j'ai pas trouvé et les gens sur les forums non plus. 
-    j'ai  conçu cette fonction pas piquée des hannetons afin de rechercher si dans mon tableau
-    j'avais une ligne comme celle-ci [-2,-2,-2,-2] qui est la remplie à l'initialisation.
+    J'ai conçu cette fonction pas piquée des hannetons afin de rechercher si dans mon tableau
+    j'avais une ligne comme celle-ci [-2,-2,-2,-2].
     J'ai comparé avec la ligne [-18,-18,-18,-18] qui N'est PAS présente dans mon tableau. 
     Cette fonction me permet de savoir si j'ai toutes les informations de la grille.
 */
-
 bool myCanFind(int[4][2025] nodesNeighborhood) {
     if (nodesNeighborhood[][].find([-2,-2,-2,-2]) != nodesNeighborhood[][].find([-18,-18,-18,-18])) {
         return true;
@@ -85,6 +80,7 @@ void spawnedFunc(int myId, int n)
    
     //Indice pour savoir combien de message on a reçu
     bool[4] msgReceived = [false, false, false, false];
+    //Si je n'ai pas de voisin, je passe l'indice correspondant à true.
     for (int i = 1 ; i < 5 ; i++) {
         if (nodesBasic[i] == -1) {
             msgReceived[i-1] = true;
@@ -110,8 +106,8 @@ void spawnedFunc(int myId, int n)
                 send(neighbourRecipient[i], "Coucou", myId);
             }
         }
-        
     }
+    // Tant qu'il y a encore un voisin à False, on continue de recevoir
     while(end(msgReceived)){
         receive
         (
@@ -173,7 +169,6 @@ void spawnedFunc(int myId, int n)
             send(neighbourRecipient[i], "ACK", myId);
         }
     }    
-
     //On envoie le nombre de message échangés
     send(ownerTid, monCptMessage);
 
@@ -200,7 +195,6 @@ void main()
 
     for(int i=0 ; i<row ; ++i) {
         for(int j=0 ; j<col ; ++j) {
-
             Noeud nul;
             nul.tid = Tid();
             nul.lid = -1;
@@ -228,7 +222,6 @@ void main()
         );    
     }
     writeln(nbMessageTotal);
-
     // wait for all completions
     receiveAllFinalization(childTid, row, col);
 }

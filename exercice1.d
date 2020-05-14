@@ -29,15 +29,11 @@ void receiveAllFinalization(Noeud [][] childTid, int row, int col)
 
 
 /*
-    Bon, ce coup ci c'est la classe "Arrays" qui est pas finie. 
-    Pour une raison sans doute très pertinentes, il y a aucun moyen de savoir si elle contient une valeur
-    avec les fonctions membres. Ou alors, j'ai pas trouvé et les gens sur les forums non plus. 
-    Bref, j'ai donc conçu cette fonction pas piquée des hannetons afin de rechercher si dans mon tableau
+    J'ai conçu cette fonction pas piquée des hannetons afin de rechercher si dans mon tableau
     j'avais une ligne comme celle-ci [-2,-2,-2,-2].
     J'ai comparé avec la ligne [-18,-18,-18,-18] qui N'est PAS présente dans mon tableau. 
     Cette fonction me permet de savoir si j'ai toutes les informations de la grille.
 */
-
 bool myCanFind(int[4][49] nodesNeighborhood) {
     if (nodesNeighborhood[][].find([-2,-2,-2,-2]) != nodesNeighborhood[][].find([-18,-18,-18,-18])) {
         return true;
@@ -66,7 +62,7 @@ void spawnedFunc(int myId, int n)
     // Il est à 1 car il y a le message du père
     int monCptMessage = 1;
     
-    // Creation des deux tableaux : Celui qui recence les noeuds et Celui qui recence leur voisin
+    // Creation des deux tableaux : Celui qui recence les noeuds et celui qui recence leurs voisins
     Noeud moi;
     moi.lid = myId;
 
@@ -78,8 +74,8 @@ void spawnedFunc(int myId, int n)
     //On peut pas creer un tableau avec des variables 
     //On peut pas donner une valeur dans une case précise à un tableau dynamique
     //Du coup, je dois définir moi même le tableau. 
-    // Avec un langage différent, j'aurais utilisé une variable au lieu du du nombre de noeud, 
-    //ça m'aurait eviter de devoir le changer à chaque changement de taille
+    //Avec un langage différent, j'aurais utilisé une variable au lieu du du nombre de noeud, 
+    //Ça m'aurait eviter de devoir le changer à chaque changement de taille
     int[4][49] nodesNeighborhood = -2;
     for(int i = 0; i<4 ; i++)
     {
@@ -89,14 +85,12 @@ void spawnedFunc(int myId, int n)
     // Envoie de mes voisins à mes voisins
     for(int i = 0; i<4 ; i++)
     {   
-        //writeln(myId);
         if(nodesBasic[i+1] != -1)
         {
             monCptMessage = monCptMessage + 1;
             send(neighbourRecipient[i], myId, cast(immutable)upNeighbor, cast(immutable)downNeighbor, cast(immutable)leftNeighbor, cast(immutable)rightNeighbor, myId);
         }
     }
-    
 
     int[] nodes;
     for (int i = 0 ; i<5 ; i++) {
@@ -105,13 +99,11 @@ void spawnedFunc(int myId, int n)
             
         }
         else {
+            //C'est une concaténation
             nodes = nodes ~ [nodesBasic[i]];
         }
     }
 
-    // if(myId == 2) {
-    //     //writeln("Je suis: ", myId, " et le booleen est a: ", a, " voici mon tableau", nodesNeighborhood);
-    // }
     while(myCanFind(nodesNeighborhood))
     {
         receive
@@ -166,12 +158,7 @@ void spawnedFunc(int myId, int n)
         );
     }
 
-    // if(myId == 2) {
-    //     writeln("Je suis: ", myId, " voici mon tableau", nodesNeighborhood);
-    // }
-
     send(ownerTid, monCptMessage);
-
     // end of your code
 
     send(ownerTid, CancelMessage());
@@ -197,7 +184,6 @@ void main()
 
     for(int i=0 ; i<row ; ++i) {
         for(int j=0 ; j<col ; ++j) {
-
             Noeud nul;
             nul.tid = Tid();
             nul.lid = -1;

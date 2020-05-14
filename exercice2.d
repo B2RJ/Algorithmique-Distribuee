@@ -31,14 +31,11 @@ void receiveAllFinalization(Noeud [][] childTid, int row, int col)
 
 
 /*
-    Pour une raison sans doute très pertinente, il y a aucun moyen de savoir si la classe array contient une valeur
-    avec les fonctions membres. Ou alors, j'ai pas trouvé et les gens sur les forums non plus. 
-    j'ai  conçu cette fonction pas piquée des hannetons afin de rechercher si dans mon tableau
-    j'avais une ligne comme celle-ci [-2,-2,-2,-2] qui est la remplie à l'initialisation.
+    J'ai conçu cette fonction pas piquée des hannetons afin de rechercher si dans mon tableau
+    j'avais une ligne comme celle-ci [-2,-2,-2,-2].
     J'ai comparé avec la ligne [-18,-18,-18,-18] qui N'est PAS présente dans mon tableau. 
     Cette fonction me permet de savoir si j'ai toutes les informations de la grille.
 */
-
 bool myCanFind(int[4][2116] nodesNeighborhood) {
     if (nodesNeighborhood[][].find([-2,-2,-2,-2]) != nodesNeighborhood[][].find([-18,-18,-18,-18])) {
         return true;
@@ -48,7 +45,6 @@ bool myCanFind(int[4][2116] nodesNeighborhood) {
 
 void spawnedFunc(int myId, int n)
 {
-  
     Noeud upNeighbor, downNeighbor, leftNeighbor, rightNeighbor;
 
     // waiting for the reception of information sent by the father
@@ -102,18 +98,12 @@ void spawnedFunc(int myId, int n)
                 }
             }
         );
-    }    
-
-    // if(myId == 2) {
-    //     writeln("Je suis: ", myId, " voici mon tableau", nodesNeighborhood);
-    // }
+    } 
 
     send(ownerTid, monCptMessage);
-
     // end of your code
 
     send(ownerTid, CancelMessage());
-    
 }
 
 
@@ -135,7 +125,6 @@ void main()
 
     for(int i=0 ; i<row ; ++i) {
         for(int j=0 ; j<col ; ++j) {
-
             Noeud nul;
             nul.tid = Tid();
             nul.lid = -1;
@@ -163,7 +152,6 @@ void main()
         );    
     }
     writeln(nbMessageTotal);
-
     // wait for all completions
     receiveAllFinalization(childTid, row, col);
 }
