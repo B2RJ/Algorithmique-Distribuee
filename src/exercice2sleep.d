@@ -39,7 +39,7 @@ void receiveAllFinalization(Noeud [][] childTid, int row, int col)
     J'ai comparé avec la ligne [-18,-18,-18,-18] qui N'est PAS présente dans mon tableau. 
     Cette fonction me permet de savoir si j'ai toutes les informations de la grille.
 */
-bool myCanFind(int[4][2025] nodesNeighborhood) {
+bool myCanFind(int[4][16] nodesNeighborhood) {
     if (nodesNeighborhood[][].find([-2,-2,-2,-2]) != nodesNeighborhood[][].find([-18,-18,-18,-18])) {
         return true;
     }  
@@ -118,8 +118,8 @@ void spawnedFunc(int myId, int n)
 void main()
 {
     // number of child processes (must be a number that can be sqrt)
-    int row = 45;
-    int col = 45;
+    int row = 4;
+    int col = 4;
     int n = row * col;
 
     // spawn threads (child processes)
@@ -150,7 +150,7 @@ void main()
 
     int nbMessageTotal = 0;
     int i = 0;
-    while (i<2025) {
+    while (i<16) {
         receive(
             (int nbMessage)
             {
