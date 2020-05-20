@@ -102,9 +102,13 @@ Pour une grille de 4 x 4 il y a 49 messages échangés. Le minimum est de 49 mes
 <p>Pour une grille de 10 x 10 il y a 361 messages échangés. Le minimum est de messages 361 alors que le maximum est de 361 messages. </p>
 <p>Pour une grille de 45 x 45 il y a 7921 messages échangés. Le minimum est de messages 7921 alors que le maximum est de 7921 messages.</p>
 
+<p> J'ai effectué une variante de ce qui était demandé initialement dans l'énoncé. J'ai utilisé la fonction receiveTimeout qui permet d'attendre la réception d'un message pendant un certain temps. Vous trouverez ce code dans le fichier exercice2sleep2.d. <a href="../src/exercice2sleep2.d">(exercice2sleep2.d)</a>. En fonction des messages reçus pendant ce temps d'attente et c'est là qu'entre en compte la variation avec ce qui était demandé, j'envoie au noeud prévu le message uniquement si il ne l'a pas envoyé avant. Je stocke cette information dans un tableau de booléen.</p>
+<p> Dans ce cas là, oui, j'ai une variation du nombre de messages. Je vous invite à lire la réponse suivante pour constater les mesures expérimentales que j'ai réalisée.</p>
+
+
 <h3>Question 4 :</h3>
 
-<p>Pas concerné.</p> 
+<p>.</p> 
 
 <br>
 <br>
