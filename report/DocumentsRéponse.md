@@ -108,7 +108,9 @@ Pour une grille de 4 x 4 il y a 49 messages échangés. Le minimum est de 49 mes
 
 <h3>Question 4 :</h3>
 
-<p>.</p> 
+<p>Dans le cadre d'une grille 20x20 sur 1 000 executions. J'obtiens en moyenne 1202 messages. Le minimum est de 1169 et le maximum 1249. On obtient un beau gain sur le nombre de message envoyé. En allongeant le temps "d'attente active, on pourrait économiser plus de messages encore, mais cela influera sur le temps total d'execution du programme."</p> 
+<p>Lors que mon noeud reçoit un message, avant chaque envoie à ses voisins, sauf l'émeteur, le noeud à la possibilité de recevoir un autre messages pendant 50 ms. 
+La source est toujours la même. Le noeud avec l'id égale à 5. C'est une constante dans cette expérimentation afin d'éviter d'avoir trop de facteurs différents. </p>
 
 <br>
 <br>
@@ -131,7 +133,7 @@ Une fois que tout ses voisins lui ont répondu, il répond au premier noeud qui 
 
 <p>Le nombre de message à augmenté.</p> 
 <p>Nous avons maintenant, sur une moyenne de 1000 executions : <br>
-Pour une grille de 4 x 4 il y a 82 messages échangés. Le minimum est de 82 messages alors que le maximum est de 88 messages. Je tiens à souligner que j'ai parcouru les résultats pendant l'execution de mon script. J'ai eu quelques fois des nombres au-dessus de 82 tels que 85, 87 et 88. Moins de 20 fois en tout.
+Pour une grille de 4 x 4 il y a 82 messages échangés. Le minimum est de 82 messages alors que le maximum est de 88 messages. Je tiens à souligner que j'ai parcouru les résultats pendant l'execution de mon script. J'ai eu quelques fois des nombres au-dessus de 82 tels que 85, 87 et 88. Moins de 20 fois en tout.<br>
 Il y a donc eu 82-48 = 34 messages supplémentaires</p>
 <p>Pour une grille de 10 x 10 il y a 622 messages échangés. Le minimum est de messages 622 alors que le maximum est de 626 messages. Une fois de plus il y a eu de légères variations.</p>
 <p>Pour une grille de 45 x 45 il y a 13 817 messages échangés. Le minimum est de messages 13 817 alors que le maximum est de 13817 messages. Il n'y a pas eu de variations ici. </p>
