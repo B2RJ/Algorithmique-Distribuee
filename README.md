@@ -15,7 +15,7 @@ Pour exécuter l'exercice 2 en prenant en compte les "pauses actives" : <code>./
 Pour compiler l'exercice 3 : <code>dmd -of=./out/exercice3 ./src/exercice3.d</code><br>
 Pour exécuter l'exercice 3 : <code>./out/exercice3</code><br></p>
 
-</p>Pour lancer recalculer les moyennes sur 1000 itérations :<br>
+</p>Pour recalculer les moyennes sur 1000 itérations :<br>
 Exercice 1 : <code>./script/exercice1.sh</code><br>
 Exercice 2 : <code>./script/exercice2.sh</code><br>
 Exercice 2 en prenant en compte les pauses : <code>./script/exercice2sleep.sh</code><br>
