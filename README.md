@@ -1,6 +1,8 @@
-<p>Les réponses sont présentes dans le dossier <a href=./report>report</a>.
+# Algorithmique-Distribuee
+This project takes place in the teaching unit Distributed Algorithms at Lyon 1 University.<br>
+We have to implement different algorithm with a base code provides by the teachers.
 
-<p>Je n'ai pas réussis à utiliser des arguments et des variables pour la taille de la grille. J'en suis désolé, elle est codée en dur.</p>
+<p>My report is inside the <a href=./report>report</a> folder.
 
 <p>Toutes les commandes suivantes sont à faire depuis la racine du dossier.</p>
 
