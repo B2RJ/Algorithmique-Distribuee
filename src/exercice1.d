@@ -29,10 +29,10 @@ void receiveAllFinalization(Noeud [][] childTid, int row, int col)
 
 
 /*
-    J'ai conçu cette fonction pas piquée des hannetons afin de rechercher si dans mon tableau
-    j'avais une ligne comme celle-ci [-2,-2,-2,-2].
-    J'ai comparé avec la ligne [-18,-18,-18,-18] qui N'est PAS présente dans mon tableau. 
-    Cette fonction me permet de savoir si j'ai toutes les informations de la grille.
+    I had to create this function to find a specific ligne. 
+    (Here, -2, -2, -2, -2). 
+    To do that, I compare with the line -18, -18, -18, -18 who didn't exist inside my array. 
+    This function allows me to know if I have all the information inside my array
 */
 bool myCanFind(int[4][49] nodesNeighborhood) {
     if (nodesNeighborhood[][].find([-2,-2,-2,-2]) != nodesNeighborhood[][].find([-18,-18,-18,-18])) {
@@ -43,7 +43,6 @@ bool myCanFind(int[4][49] nodesNeighborhood) {
 
 void spawnedFunc(int myId, int n)
 {
-  
     Noeud upNeighbor, downNeighbor, leftNeighbor, rightNeighbor;
 
     // waiting for the reception of information sent by the father
@@ -58,31 +57,27 @@ void spawnedFunc(int myId, int n)
         }
     );
 
-    // Création du compteur de message
-    // Il est à 1 car il y a le message du père
+    // I create the counter
+    // I begin to one because we have the father's message yet
     int monCptMessage = 1;
     
-    // Creation des deux tableaux : Celui qui recence les noeuds et celui qui recence leurs voisins
+    // I create two arrays. One for the nodes and one for the neighbor
     Noeud moi;
     moi.lid = myId;
 
     int[] nodesBasic = [myId, upNeighbor.lid, downNeighbor.lid, leftNeighbor.lid, rightNeighbor.lid];
     
-    // Tableau de destinataire
+    // Array of my recipient
     Tid[4] neighbourRecipient = [upNeighbor.tid, downNeighbor.tid, leftNeighbor.tid, rightNeighbor.tid];
 
-    //On peut pas creer un tableau avec des variables 
-    //On peut pas donner une valeur dans une case précise à un tableau dynamique
-    //Du coup, je dois définir moi même le tableau. 
-    //Avec un langage différent, j'aurais utilisé une variable au lieu du du nombre de noeud, 
-    //Ça m'aurait eviter de devoir le changer à chaque changement de taille
+    // I didn't find how to create an array with variable in DLang, so my code isn't very optimize
     int[4][49] nodesNeighborhood = -2;
     for(int i = 0; i<4 ; i++)
     {
         nodesNeighborhood[myId][i] = nodesBasic[i+1]; 
     }
 
-    // Envoie de mes voisins à mes voisins
+    // I send my neighbors to my neighbors
     for(int i = 0; i<4 ; i++)
     {   
         if(nodesBasic[i+1] != -1)
@@ -99,7 +94,7 @@ void spawnedFunc(int myId, int n)
             
         }
         else {
-            //C'est une concaténation
+            //This is a concatenation
             nodes = nodes ~ [nodesBasic[i]];
         }
     }
@@ -111,30 +106,30 @@ void spawnedFunc(int myId, int n)
             (int hisId, immutable(Noeud) uneighbor, immutable(Noeud) dneighbor, immutable(Noeud) lneighbor, immutable(Noeud) rneighbor, int IdSources)
             {
                 if(nodes.canFind(hisId) || hisId == -1 ){
-                    //On ne fait rien, mais "!" c'est pas not dans ce langage
+                    //We do nothing but I didn't find how to make a not
                 } else {
                     nodes = nodes ~ [hisId];
                 }
                 if(nodes.canFind(uneighbor.lid) || uneighbor.lid == -1 ) {
-                    //Même chose. L'impression de coder comme en L1
+                    //We do nothing but I didn't find how to make a not
                 }
                 else {
                     nodes = nodes ~ [uneighbor.lid];
                 }
                 if(nodes.canFind(dneighbor.lid) || dneighbor.lid == -1 ) {
-                    //Toujours pareil, pas de length ou de size sur les listes, je trouve pas le not
+                    //We do nothing but I didn't find how to make a not
                 }
                 else {
                     nodes = nodes ~ [dneighbor.lid];
                 }
                 if(nodes.canFind(lneighbor.lid) ||lneighbor.lid == -1 ) {
-                    //Toujours pareil
+                    //We do nothing but I didn't find how to make a not
                 }
                 else {
                     nodes = nodes ~ [lneighbor.lid];
                 }
                 if(nodes.canFind(rneighbor.lid) ||rneighbor.lid == -1 ) {
-                    //Désolé pour la longueur du code
+                    //We do nothing but I didn't find how to make a not
                 }
                 else {
                     nodes = nodes ~ [rneighbor.lid];
@@ -145,7 +140,7 @@ void spawnedFunc(int myId, int n)
                 nodesNeighborhood[hisId][2] = lneighbor.lid;
                 nodesNeighborhood[hisId][3] = rneighbor.lid;
                 
-                // Envoie de ceci à mes voisins, sauf celui qui me l'a envoyé
+                // I send the message to my neighbor except the sender
                 for(int i = 0; i<4 ; i++)
                 {   
                     if(nodesBasic[i+1] != -1 && IdSources != nodesBasic[i+1])
@@ -189,7 +184,7 @@ void main()
             nul.lid = -1;
 
             Noeud up, down, left, right;
-            // On attribut à up, down, left, right, le bon voisin. Si le voisin n'existe pas, on donne le noeud 'nul' qui vaut -1
+            // We give up, down, left and right. If the neighbor didn't exist, we give "nul" (-1)
             up = i > 0 ? childTid[i-1][j] : nul;
             down = i < row-1 ? childTid[i+1][j] : nul;
             left = j > 0 ? childTid[i][j-1] : nul;

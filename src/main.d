@@ -72,7 +72,7 @@ void main()
             nul.lid = -1;
 
             Noeud up, down, left, right;
-            // On attribut à up, down, left, right, le bon voisin. Si le voisin n'existe pas, on donne le noeud 'nul' qui vaut -1
+            // We give up, down, left and right. If the neighbor didn't exist, we give "nul" (-1)
             up = i > 0 ? childTid[i-1][j] : nul;
             down = i < row-1 ? childTid[i+1][j] : nul;
             left = j > 0 ? childTid[i][j-1] : nul;
