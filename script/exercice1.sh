@@ -3,7 +3,7 @@ let "min = 1000000"
 let "max = 0"
 let "sum = 0"
 dmd -of=./out/exercice1  ./src/exercice1.d
-for i in {1..1000}
+for i in {1..100}
 do
     let current=$(./out/exercice1)
     let "sum = sum + current"
@@ -17,7 +17,7 @@ do
     fi
     echo $current
 done
-let "sum = sum / 1000"
+let "sum = sum / 100"
 echo min : $min
 echo max : $max
 echo average = $sum
